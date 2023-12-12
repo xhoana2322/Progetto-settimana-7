@@ -1,0 +1,18 @@
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Inter', sans-serif;
+    font-family: 'Kalnia', serif;
+}
+
+.intro {
+    background-image: url('../img/bg.image.jpg');
+    height: 50vh;
+    width: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+p {
+    font-family: 'Inter', sans-serif;
+    font-family: 'Nunito', sans-serif;
+}
