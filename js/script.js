@@ -10,6 +10,7 @@ headers: {
   })
   .catch((error) => console.log("Error!! " + error)); */
 
+// caricamento della pagina
   document.addEventListener('DOMContentLoaded', () => {
     if (window.location.pathname.includes('back-office.html')) {
         addProduct();
@@ -20,6 +21,8 @@ headers: {
     }
 });
 
+
+// prendiamo i dati 
 function fetchDataAndAppend() {
     fetch('https://striveschool-api.herokuapp.com/api/product/', {
         headers: {
@@ -35,6 +38,7 @@ function fetchDataAndAppend() {
     });
 }
 
+// appendiamo i dati presi sopra alla card
 function appendDataToIndex(products) {
     let cardContainer = document.querySelector('#sentCardContainer');
     cardContainer.innerHTML = '';
@@ -45,7 +49,7 @@ function appendDataToIndex(products) {
     });
 }
 
-
+// funzione per form 
 function addProduct() {
     let button = document.querySelector('#btn');
     if (button) {
@@ -123,19 +127,19 @@ function addProduct() {
 
 
 
-fetch("https://striveschool-api.herokuapp.com/api/product/", {
-    headers: {
-        "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTc4YmQ2YzI2NzYxNDAwMTgzYzQwNzMiLCJpYXQiOjE3MDI0MTE2MjgsImV4cCI6MTcwMzYyMTIyOH0.irG3lEPL2Hi7COi3T7ZNF-chmgWFgEXui0TNn0oPgmk"
-    }
-    })
-        .then((response) => response.json())
-        .then((obj) => {
-            console.log(obj);
-        })
-        .catch((error) => console.log("Error!! " + error)); 
+// fetch("https://striveschool-api.herokuapp.com/api/product/", {
+//     headers: {
+//         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTc4YmQ2YzI2NzYxNDAwMTgzYzQwNzMiLCJpYXQiOjE3MDI0MTE2MjgsImV4cCI6MTcwMzYyMTIyOH0.irG3lEPL2Hi7COi3T7ZNF-chmgWFgEXui0TNn0oPgmk"
+//     }
+//     })
+//         .then((response) => response.json())
+//         .then((obj) => {
+//             console.log(obj);
+//         })
+//         .catch((error) => console.log("Error!! " + error)); 
 
 
-
+// funzione per prendere i prodotti
 function fetchProducts() {
     fetch('https://striveschool-api.herokuapp.com/api/product/', {
         headers: {
@@ -151,6 +155,8 @@ function fetchProducts() {
     });
 }
 
+
+//funzione per la visibilità dei prodotti sulla homepage
 function displayProducts(products) {
     let cardContainer = document.querySelector('#cardContainer');
     cardContainer.innerHTML = '';
@@ -161,18 +167,20 @@ function displayProducts(products) {
     });
 }
 
+//funzione per la creazione delle card su JS
 function createProductCard(product) {
     let card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
         <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-        <div class="card-body">
-            <h5 class="card-title">Marca: ${product.name}</h5>
-            <p class="card-text">Description: ${product.description}</p>
-            <p class="card-text">Price: $${product.price}</p>
-            <p class="card-text">Brand: ${product.brand}</p>
+        <div class="card-body d-flex flex-column">
+            <h5 class="card-title">${product.name}</h5>
+            <p class="card-text">${product.description}</p>
+            <p class="card-text">$${product.price}</p>
+            <p class="card-text">${product.brand}</p>
+            <button class="btn btn-primary delete-btn">Edit</button>
+            <button class="btn btn-success send-btn my-2">Public</button>
             <button class="btn btn-danger delete-btn">Delete</button>
-            <button class="btn btn-success send-btn">Public</button>
         </div>`;
 
 
@@ -189,17 +197,18 @@ function createProductCard(product) {
     return card;
 }
 
+
+// funzione per creare card nell'html
 function createCardIndex(product) {
     let card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
         <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-        <div class="card-body">
-            <h5 class="card-title">Marca: ${product.name}</h5>
-            <p class="card-text">Description: ${product.description}</p>
-            <p class="card-text">Price: $${product.price}</p>
-            <p class="card-text">Brand: ${product.brand}</p>
-            <button class="btn btn-primary delete-btn">Edit</button>
+        <div class="card-body text-center">
+            <h5 class="card-title fs-4"> ${product.name}</h5>
+            <p class="card-text fs-5"> ${product.description}</p>
+            <p class="card-text fs-5">$${product.price}</p>
+            <p class="card-text">${product.brand}</p>
             <button class="btn btn-success send-btn">Description</button>
         </div>`;
         
