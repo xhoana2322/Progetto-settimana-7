@@ -17,7 +17,9 @@ headers: {
         fetchProducts();
     } else if (window.location.pathname.includes('index.html')) {
         fetchDataAndAppend();
-        button();
+        buttonBackOffice();
+        getProductById();
+
     }
 });
 
@@ -123,10 +125,6 @@ function addProduct() {
 }
 
 
-
-
-
-
 // fetch("https://striveschool-api.herokuapp.com/api/product/", {
 //     headers: {
 //         "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTc4YmQ2YzI2NzYxNDAwMTgzYzQwNzMiLCJpYXQiOjE3MDI0MTE2MjgsImV4cCI6MTcwMzYyMTIyOH0.irG3lEPL2Hi7COi3T7ZNF-chmgWFgEXui0TNn0oPgmk"
@@ -172,8 +170,8 @@ function createProductCard(product) {
     let card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
-        <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-        <div class="card-body d-flex flex-column">
+            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+            <div class="card-body d-flex flex-column">
             <h5 class="card-title">${product.name}</h5>
             <p class="card-text">${product.description}</p>
             <p class="card-text">$${product.price}</p>
@@ -203,8 +201,10 @@ function createCardIndex(product) {
     let card = document.createElement('div');
     card.classList.add('card');
     card.innerHTML = `
-        <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
-        <div class="card-body text-center">
+        <a href="dettaglio.html">
+            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+        </a>
+        <div class="card-body text-center d-flex flex-column justify-content-center">
             <h5 class="card-title fs-4"> ${product.name}</h5>
             <p class="card-text fs-5"> ${product.description}</p>
             <p class="card-text fs-5">$${product.price}</p>
@@ -259,7 +259,7 @@ function clearForm() {
     document.querySelector('#text5').value = '';
 }
 
-function button() {
+function buttonBackOffice() {
     let btnBackOffice = document.querySelector('#btnBackOffice');
 
     btnBackOffice.addEventListener('click', () => {
@@ -267,3 +267,22 @@ function button() {
     })
 }
 
+
+// pagina del dettaglio
+function getProductById(id) {
+    let url = `https://striveschool-api.herokuapp.com/api/product/${id}`;
+
+    fetch(url, {
+        method: "GET",
+        headers: {
+            "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NTc4YmQ2YzI2NzYxNDAwMTgzYzQwNzMiLCJpYXQiOjE3MDI0MTE2MjgsImV4cCI6MTcwMzYyMTIyOH0.irG3lEPL2Hi7COi3T7ZNF-chmgWFgEXui0TNn0oPgmk"
+        }
+    })
+    .then(response => response.json())
+    .then(json => {
+        console.log(json)
+    })
+    .catch(error => console.log(error))
+}
+
+// FINIRE DI INSERIRE LA PAGINA DEL DETTAGLIO
