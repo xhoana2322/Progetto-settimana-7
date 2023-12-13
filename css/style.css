@@ -1,4 +1,4 @@
-h1, h2, h3, h4, h5, h6 {
+h1, h2, h3, h4 {
     font-family: 'Inter', sans-serif;
     font-family: 'Kalnia', serif;
 }
@@ -12,7 +12,14 @@ h1, h2, h3, h4, h5, h6 {
     background-size: cover;
 }
 
-p {
+body:not(h1, h2, h3, h4){
     font-family: 'Inter', sans-serif;
     font-family: 'Nunito', sans-serif;
+}
+
+
+.card {
+    width: 300px;
+    padding: 1rem;
+    margin: 1rem;
 }
