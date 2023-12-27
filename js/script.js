@@ -19,7 +19,12 @@ headers: {
         fetchDataAndAppend();
         buttonBackOffice();
         getProductById();
-
+        
+    } else if (window.location.pathname.includes('dettaglio.html')) {
+        let params = new URLSearchParams(document.location.search);
+        let id = params.get("id");
+        search = params.get("search");
+        getProductById(id);
     }
 });
 
@@ -53,7 +58,8 @@ function appendDataToIndex(products) {
 
 // funzione per form 
 function addProduct() {
-    let button = document.querySelector('#btn');
+    console.log('addProduct() function called');
+    let button = document.querySelector('.backOfficeIntro #btn');
     if (button) {
         button.addEventListener('click', () => {
             let form = document.createElement('form');
@@ -286,3 +292,21 @@ function getProductById(id) {
 }
 
 // FINIRE DI INSERIRE LA PAGINA DEL DETTAGLIO
+
+function createPhotoCardDettaglio() {
+    let card = document.createElement('div');
+    card.classList.add('card');
+    card.innerHTML = `
+        <a href="dettaglio.html">
+            <img src="${product.imageUrl}" class="card-img-top" alt="${product.name}">
+        </a>
+        <div class="card-body text-center d-flex flex-column justify-content-center">
+            <h5 class="card-title fs-4"> ${product.name}</h5>
+            <p class="card-text fs-5"> ${product.description}</p>
+            <p class="card-text fs-5">$${product.price}</p>
+            <p class="card-text">${product.brand}</p>
+            <button class="btn btn-success send-btn">Description</button>
+        </div>`;
+        
+        return card;
+}
